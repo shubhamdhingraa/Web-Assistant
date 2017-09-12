@@ -1,0 +1,521 @@
+<html>
+<head>
+  <title>NeXllo</title>
+      <link rel="icon" href="http://paybefore.com/wp-content/uploads/2016/11/Robot_icon.png" type="image/x-icon">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://bootswatch.com/cyborg/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+
+
+
+<style>
+#container1
+{
+
+align:center;
+  width:400px;
+}
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Cabin:400);
+
+
+
+.webdesigntuts-workshop input {
+	background: #222;
+	background: -webkit-linear-gradient(#333, #222);
+	background: linear-gradient(#333, #222);
+	border: 1px solid #444;
+	border-radius: 5px 0 0 5px;
+	box-shadow: 0 2px 0 #000;
+	color: #888;
+}
+
+.ie .webdesigntuts-workshop input {
+	line-height: 40px;
+}
+
+.webdesigntuts-workshop input::-webkit-input-placeholder {
+   color: #888;
+}
+
+.webdesigntuts-workshop input:-moz-placeholder {
+   color: #888;
+}
+
+.webdesigntuts-workshop input:focus {
+	-webkit-animation: glow 800ms ease-out infinite alternate;
+	animation: glow 800ms ease-out infinite alternate;
+	background: #222922;
+	background: -webkit-linear-gradient(#333933, #222922);
+	background: linear-gradient(#333933, #222922);
+	border-color: #393;
+	box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+	color: #efe;
+	outline: none;
+}
+
+.webdesigntuts-workshop input:focus::-webkit-input-placeholder {
+	color: #efe;
+}
+
+.webdesigntuts-workshop input:focus:-moz-placeholder {
+	color: #efe;
+}
+
+.webdesigntuts-workshop button {
+	background: #222;
+	background: -webkit-linear-gradient(#333, #222);
+	background: linear-gradient(#333, #222);
+	box-sizing: border-box;
+	border: 1px solid #444;
+	border-left-color: #000;
+	border-radius: 0 5px 5px 0;
+	box-shadow: 0 2px 0 #000;
+	color: #fff;
+	display: block;
+	float: left;
+	font-family: 'Cabin', helvetica, arial, sans-serif;
+	font-size: 13px;
+	font-weight: 400;
+	height: 40px;
+	line-height: 40px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	text-shadow: 0 -1px 0 #000;
+	width: 80px;
+}
+
+.webdesigntuts-workshop button:hover,
+.webdesigntuts-workshop button:focus {
+	background: #292929;
+	background: -webkit-linear-gradient(#393939, #292929);
+	background: linear-gradient(#393939, #292929);
+	color: #5f5;
+	outline: none;
+}
+
+.webdesigntuts-workshop button:active {
+	background: #292929;
+	background: -webkit-linear-gradient(#393939, #292929);
+	background: linear-gradient(#393939, #292929);
+	box-shadow: 0 1px 0 #000, inset 1px 0 1px #222;
+	top: 1px;
+}
+
+@-webkit-keyframes glow {
+    0% {
+		border-color: #393;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }
+    100% {
+		border-color: #6f6;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}
+
+@keyframes glow {
+    0% {
+		border-color: #393;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }
+    100% {
+		border-color: #6f6;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}
+
+
+</style>
+
+<script>
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDzwbw2ThF56qAeY2-Bur5kfFRrh9nyeV0",
+    authDomain: "hack-e27b9.firebaseapp.com",
+    databaseURL: "https://hack-e27b9.firebaseio.com",
+    projectId: "hack-e27b9",
+    storageBucket: "",
+    messagingSenderId: "1008339045572"
+  };
+  firebase.initializeApp(config);
+</script>
+
+
+
+  <script type="text/javascript">
+
+
+  var score;
+  var keys;
+  var counter=0;
+  var output='';
+  accessCounter1();
+
+
+
+
+
+    var accessToken = "ba3c1f842feb4f898c399720f70fd0ac",
+      baseUrl = "https://api.api.ai/v1/",
+      $speechInput,
+      $recBtn,
+      recognition,
+      messageRecording = "Recording...",
+      messageCouldntHear = "I couldn't hear you, could you say that again?",
+      messageInternalError = "Oh no, there has been an internal server error",
+      messageSorry = "I'm sorry, I don't have the answer to that yet.";
+
+var l='';
+
+
+    $(document).ready(function() {
+
+
+
+      $('#searchForm').on('submit',(e)=>
+      {
+
+
+      });
+
+
+
+
+
+
+       $speechInput = $("#speech");
+      $recBtn = $("#rec");
+      l=$('#speech').val();
+
+
+              $speechInput.keypress(function(event) {
+                if (event.which == 13) {
+
+
+
+
+                  event.preventDefault();
+                  send();
+                }
+              });
+
+
+      $recBtn.on("click", function(event) {
+        switchRecognition();
+      });
+      $(".debug__btn").on("click", function() {
+        $(this).next().toggleClass("is-active");
+        return false;
+      });
+    });
+
+    function startRecognition() {
+      recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+          recognition.interimResults = false;
+
+      recognition.onstart = function(event) {
+        respond(messageRecording);
+        updateRec();
+      };
+      recognition.onresult = function(event) {
+        recognition.onend = null;
+
+        var text = "";
+          for (var i = event.resultIndex; i < event.results.length; ++i) {
+            text += event.results[i][0].transcript;
+          }
+          setInput(text);
+        stopRecognition();
+      };
+      recognition.onend = function() {
+        respond(messageCouldntHear);
+        stopRecognition();
+      };
+      recognition.lang = "en-US";
+      recognition.start();
+    }
+
+    function stopRecognition() {
+      if (recognition) {
+        recognition.stop();
+        recognition = null;
+      }
+      updateRec();
+    }
+
+    function switchRecognition() {
+      if (recognition) {
+        stopRecognition();
+      } else {
+        startRecognition();
+      }
+    }
+
+    function setInput(text) {
+      $speechInput.val(text);
+
+
+      send();
+    }
+
+    function updateRec() {
+      $recBtn.text(recognition ? "Stop" : "Speak");
+    }
+
+    function send() {
+
+
+
+
+
+      var text = $speechInput.val();
+      console.log('ye text hai '+text)
+      $.ajax({
+        type: "POST",
+        url: baseUrl + "query",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+          "Authorization": "Bearer " + accessToken
+        },
+        data: JSON.stringify({query: text, lang: "en", sessionId: "yaydevdiner"}),
+
+        success: function(data) {
+          prepareResponse(data);
+          console.log(data);
+        },
+        error: function() {
+          respond(messageInternalError);
+        }
+      });
+    }
+
+    function prepareResponse(val) {
+      var debugJSON = JSON.stringify(val, undefined, 2),
+        spokenResponse = val.result.speech;
+
+      respond(spokenResponse);
+      debugRespond(debugJSON);
+    }
+
+    function debugRespond(val) {
+      $("#response").text(val);
+    }
+
+    function respond(val) {
+      if (val == "") {
+        val = messageSorry;
+      }
+
+      if (val !== messageRecording) {
+        var msg = new SpeechSynthesisUtterance();
+        msg.voiceURI = "native";
+        msg.text = val;
+        msg.lang = "en-US";
+        window.speechSynthesis.speak(msg);
+      }
+
+      let searchText=$('#speech').val();
+      console.log(firebase);
+      console.log('User ka mesage '+searchText);
+        //console.log("User : "+searchText);
+      console.log('Chatbot ka message'+val);
+
+submitQueryToFirebase(searchText,val);
+
+
+
+searchForm.reset();
+//e.preventDefault();
+  let output1=``;
+    //output1=`<h4></h4><h2 style="color:black;text-align:right"> ${searchText}</h2><h4>ChatBot :</h4><h2 style="color:red"> ${val}</h2>`;
+    //let x='<p></p>';
+  //  $('#details1').html(output1);
+
+
+ //var output2=`<h4>ChatBot :</h4><h2 style="color:red"> ${val}</h2>`;
+
+
+
+
+      //$("#spokenResponse").addClass("is-active").find(".spoken-response__text").html(output2);
+//$('#details2').html(output2);
+
+
+    }
+
+
+
+    function submitQueryToFirebase(searchText,searchName){
+    console.log('submit query user csupport '+searchText +searchName);
+
+    //For saving searchText Variable
+    var x=firebase.database().ref('Assistant');
+accessCounter();
+    var data={
+
+    user:searchText,
+    customerSupport:searchName,
+    messageId:counter
+    }
+    //x.push(data);
+    x.child(counter).set(data);
+
+    console.log('counter kitna h?')
+    counter++;
+    console.log(counter);
+
+    accessData();
+
+  }
+  //ACCESS DATA
+  function accessData()
+  {
+      accessCounter();
+    var y=firebase.database().ref('Assistant');
+    y.on('value',got,error);        //event is value  value has two call back   success got data and error for error data
+
+  }
+
+
+  function accessCounter1()
+  {
+    var y=firebase.database().ref('Assistant');
+    y.on('value',got,error);
+  }
+
+  function accessCounter()
+  {
+    var y=firebase.database().ref('Assistant');
+    y.on('value',got,error);
+  }
+
+
+
+  function got(data)
+  {
+    console.log('lol');
+    //console.log(data.val());
+    console.log(data.val());
+    if(data.val()==null)
+    {
+
+console.log('data.val() block');
+      counter=0;}
+
+
+    else{
+console.log('else block');
+
+     score=data.val();
+    var keys=Object.keys(score);
+    console.log(keys);
+  console.log('Length of Keys : '+keys.length);
+  for(var i=0;i<keys.length;i++)
+  {
+    console.log("Database access wala user "+score[i].user);
+    console.log("Database access wala Customer Support "+score[i].customerSupport);
+//    output=output+`<h4 style="color:black;text-align:left"><b>User :</b> </h4><h2 style="color:blue;  text-align:right">${score[i].user}</h2><hr><h4 style="color:black;text-align:left"><b>Customer Support :</b> </h4><h2 style="color:green;text-align:right">${score[i].customerSupport}</h2> <hr /> `;
+    output=`<h4 style="color:black;text-align:left"><b>User :</b> </h4><h2 style="color:cyan;  text-align:right">${score[i].user}</h2><hr><h4 style="color:black;text-align:left"><b>Customer Support :</b> </h4><h2 style="color:green;text-align:right">${score[i].customerSupport}</h2> <hr /> `;
+  }
+  counter=keys.length;
+  console.log('keys length '+counter);
+  }
+
+
+
+
+  console.log("Counter is"+counter);
+  $('#details1').html(output);
+  output='';
+  }
+
+  function error(err)
+  {
+    console.log(err);
+  }
+
+
+
+
+
+
+
+  </script>
+
+</head>
+<body>
+
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+  <div class="navbar-header">
+        <a class="navbar-brand" href="index.html"><img src="http://paybefore.com/wp-content/uploads/2016/11/Robot_icon.png" height="25" width="25" </img></a>
+    <a class="navbar-brand" href="index.html">NeXllo - A Smart Assistant</a>
+
+  </div>
+  </div>
+  </nav>
+
+
+
+
+  <div class="container">
+    <div class="jumbotron">
+      <div class="row">
+
+     <h3 class="text-center">Place Query Here : </h3>
+     <div class="col-sm-10">
+
+         <form id="searchForm">
+       <input type="text" class="form-control" id="speech" placeholder="Chat Here !"></input>
+     </form>
+   </div>
+     <div class="col-sm-2">
+     <button id="rec" class="btn btn-success" >Speak</button>
+</div><div>
+  <br>
+  <div class="jumbotron">
+     <div class="container">
+       <div id="details1" class="row"></div>
+       <div id="details2" class="row"></div>
+
+
+     </div></div>
+
+
+     <div id="spokenResponse" class="spoken-response">
+       <div class="spoken-response__text"></div>
+     </div>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <div id="footer">
+          <ul class="footer">
+            <li><h4>© WebApp built by <a href="http://www.iamsid.cf">Shubham Dhingra</a> and <a href="https://www.linkedin.com/in/shubham-dhingra-456592109/">Rishabh Goel.</a></h4></li>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type="text/css">
+</body>
+</html>

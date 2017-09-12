@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>chart.js</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<canvas id="chart"></canvas>
+</div>
+<script>
+let chart=document.getElementById('chart').getContext('2d');
+let barchart=new Chart(chart,{
+	type:'doughnut',
+	data:{
+		labels:['delhi','mumbai','jammu','kashmir','calcutta'],
+		datasets:[{
+			label:'population',
+			data:[
+			230,
+			500,
+			400,
+			300,
+			270,
+			],
+			backgroundColor:['red','green','blue','yellow','pink']
+		}]
+	},
+	options:{
+		title:{
+			display:true,
+			text:'population of cities in a country',
+			fontSize:25
+		}
+	},
+	layout:{
+		padding:{
+			left:50,
+			right:0,
+			bottom:0,
+			top:0
+		}
+	}
+});
+</script>
+</body>
+</html>

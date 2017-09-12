@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NeXllo</title>
+	<link rel="stylesheet" type="text/css" href="particles.css">
+</head>
+
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDrEDfXZFvkD54uva4kXzHybHb-QHYZK-8",
+    authDomain: "nexllo-dd97b.firebaseapp.com",
+    databaseURL: "https://nexllo-dd97b.firebaseio.com",
+    projectId: "nexllo-dd97b",
+    storageBucket: "nexllo-dd97b.appspot.com",
+    messagingSenderId: "171964216898"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<!--Firebase Sign-in -->
+ <script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: 'https://www.google.com',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.PhoneAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>'
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
+
+<body>
+<div id="particles-js">
+	<div id="image">
+<img src="nexllo.jpg">
+	</div>
+
+<div id="firebaseui-auth-container"></div>
+
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js">
+console.log("hi");
+</script>
+<script>
+particlesJS.load('particles-js', 'particles.json', function() {
+  console.log('callback - particles.js config loaded');
+});
+
+</script>
+</body>
+</html> 
